@@ -1,0 +1,8 @@
+node_modules
+.next
+/*.js
+/*.md
+dist
+coverage
+.vscode
+/README.md

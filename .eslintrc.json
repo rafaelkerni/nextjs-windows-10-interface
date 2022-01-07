@@ -1,0 +1,59 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true,
+        "jest": true
+    },
+    "extends": [
+        "next/core-web-vitals",
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "prettier"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 12,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "project": "./tsconfig.json"
+    },
+    "plugins": [
+        "@emotion",
+        "react",
+        "@typescript-eslint",
+        "eslint-plugin-import-helpers",
+        "prettier"
+    ],
+    "rules": {
+        "prettier/prettier": "error",
+        "space-before-function-paren": "off",
+        "react/prop-types": "off",
+        "MD033/no-inline-html": "off",
+        "@emotion/jsx-import": "error",
+        "@emotion/no-vanilla": "error",
+        "@emotion/import-from-emotion": "error",
+        "@emotion/styled-import": "error",
+        // suppress errors for missing 'import React' in files
+        "react/react-in-jsx-scope": "off",
+        //automatic order imports
+        "import-helpers/order-imports": [
+            "warn",
+            {
+                "newlinesBetween": "always",
+                "groups": [
+                    "/^react$/",
+                    "/^next/",
+                    "/^@mui//",
+                    "/redux/",
+                    "module",
+                    "/^@//",
+                    ["parent", "sibling"]
+                ],
+                "alphabetize": { "order": "asc", "ignoreCase": true }
+            }
+        ]
+    }
+}
