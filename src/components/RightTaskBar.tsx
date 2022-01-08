@@ -49,7 +49,7 @@ const RightTaskBar = () => {
       <LightTooltip
         title={'Mostrar ícones ocultos'}
         placement="top"
-        enterTouchDelay={10000}
+        enterNextDelay={1000}
       >
         <Grid
           item
@@ -72,7 +72,7 @@ const RightTaskBar = () => {
       <LightTooltip
         title={'Altofalantes: 100%'}
         placement="top"
-        enterTouchDelay={10000}
+        enterNextDelay={1000}
       >
         <Grid
           item
@@ -101,7 +101,7 @@ const RightTaskBar = () => {
           </div>
         }
         placement="top"
-        enterTouchDelay={10000}
+        enterNextDelay={1000}
       >
         <Grid
           container
@@ -129,7 +129,7 @@ const RightTaskBar = () => {
           day: 'numeric'
         })}
         placement="top"
-        enterTouchDelay={10000}
+        enterNextDelay={1000}
       >
         <Grid
           container
@@ -161,7 +161,7 @@ const RightTaskBar = () => {
       <LightTooltip
         title={'Não há notificações novas'}
         placement="top"
-        enterTouchDelay={10000}
+        enterNextDelay={1000}
       >
         <Grid
           item

@@ -7,6 +7,7 @@ import { Box, Grid, Drawer, AppBar } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
 
 import Desktop from '@/components/Desktop'
+import LeftTaskBar from '@/components/LeftTaskBar'
 import RightTaskBar from '@/components/RightTaskBar'
 import StartButton from '@/components/StartButton'
 import useRedux from '@/hooks/useRedux'
@@ -73,7 +74,7 @@ const Home: NextPage = () => {
               justifyContent="space-between" // Add it here :)
               container
             >
-              <StartButton />
+              <LeftTaskBar />
               <RightTaskBar />
             </Grid>
           </div>

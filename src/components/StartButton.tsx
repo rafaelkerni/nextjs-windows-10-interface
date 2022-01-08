@@ -1,6 +1,8 @@
 import { useEffect, useState, ReactNode } from 'react'
 
-import { Box, Toolbar, Grid } from '@mui/material'
+import Image from 'next/image'
+
+import { Box, Toolbar, Grid, Collapse } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import Tooltip, {
   TooltipProps,
@@ -36,16 +38,64 @@ const cls2 = css`
   color: #429ce3;
 `
 
+interface AppProps {
+  name: string
+  image: string
+}
+
 const StartButton = () => {
-  const [hover, setHover] = useState(false)
+  const [hover, setHover] = useState('')
   const { setState } = useRedux('startbutton', useDispatch())
   const data = useSelector(state => state.data)
+
+  function AppComponent({ name, image }: AppProps) {
+    return (
+      <Grid
+        item
+        display="flex"
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+        style={{
+          paddingTop: 10,
+          paddingBottom: 15
+        }}
+        onMouseEnter={() => setHover(name)}
+        onMouseLeave={() => setHover('')}
+        className={cx({ [cls1]: hover === name })}
+      >
+        <div
+          style={{
+            marginTop: 3,
+            flexGrow: 1,
+            paddingInline: 10
+          }}
+        >
+          <Image src={image} width={25} height={25} alt={name} />
+        </div>
+        <Collapse
+          orientation="horizontal"
+          in={hover === name}
+          timeout={200}
+          collapsedSize={38}
+        >
+          <div
+            style={{
+              height: 2,
+              width: 45,
+              backgroundColor: '#83C0EF'
+            }}
+          ></div>
+        </Collapse>
+      </Grid>
+    )
+  }
 
   return (
     <LightTooltip
       title="Iniciar"
       placement="top"
-      enterTouchDelay={10000}
+      enterNextDelay={1000}
     >
       <Grid
         item
@@ -58,12 +108,15 @@ const StartButton = () => {
           paddingInline: 20,
           paddingBottom: 20
         }}
-        onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}
-        className={cx({ [cls1]: hover })}
+        onMouseEnter={() => setHover('start')}
+        onMouseLeave={() => setHover('')}
+        className={cx({ [cls1]: hover === 'start' })}
         onClick={() => setState({ open: !data.startbutton.open })}
       >
-        <FaWindows size="1.5em" className={cx({ [cls2]: hover })} />
+        <FaWindows
+          size="1.5em"
+          className={cx({ [cls2]: hover === 'start' })}
+        />
       </Grid>
     </LightTooltip>
   )

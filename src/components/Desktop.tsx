@@ -18,9 +18,12 @@ import { css, cx } from '@emotion/css'
 import {
   DragDropContext,
   Droppable,
-  Draggable
+  Draggable as Draggable2
 } from 'react-beautiful-dnd'
+import Draggable from 'react-draggable'
 import { FaWindows } from 'react-icons/fa'
+
+import Chrome from '@/components/Chrome'
 
 //importa o hook
 import useRedux from '@/hooks/useRedux'
@@ -70,7 +73,7 @@ const Desktop = () => {
           >
             {apps.map(({ id, name, thumb }, index) => {
               return (
-                <Draggable key={id} draggableId={id} index={index}>
+                <Draggable2 key={id} draggableId={id} index={index}>
                   {provided => (
                     <div
                       ref={provided.innerRef}
@@ -104,13 +107,26 @@ const Desktop = () => {
                       </Grid>
                     </div>
                   )}
-                </Draggable>
+                </Draggable2>
               )
             })}
             {provided.placeholder}
           </div>
         )}
       </Droppable>
+      <Draggable bounds="body">
+        <div
+          style={{
+            position: 'relative',
+            zIndex: 1,
+            backgroundColor: 'white',
+            width: '80%',
+            height: '60%'
+          }}
+        >
+          <Chrome />
+        </div>
+      </Draggable>
     </DragDropContext>
   )
 }
