@@ -13,7 +13,7 @@ import StartButton from '@/components/StartButton'
 import useRedux from '@/hooks/useRedux'
 
 const Home: NextPage = () => {
-  const { setState } = useRedux('startbutton', useDispatch())
+  const { setState } = useRedux(useDispatch())
   const data = useSelector(state => state.data)
 
   return (
@@ -35,7 +35,7 @@ const Home: NextPage = () => {
           hideBackdrop={true}
           anchor={'bottom'}
           open={data.startbutton?.open}
-          onClose={() => setState({ open: false })}
+          onClose={() => setState('startbutton', { open: false })}
           PaperProps={{
             sx: {
               height: 550,

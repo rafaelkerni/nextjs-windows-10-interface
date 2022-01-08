@@ -24,40 +24,35 @@ import {
   VscChromeMaximize,
   VscChromeMinimize
 } from 'react-icons/vsc'
+import Iframe from 'react-iframe'
+
+import Navigation from '@/components/Chrome/Navigation'
+import SysButtons from '@/components/SysButtons'
+
+const BorderLessIframe = styled(Iframe)`
+  border-width: 0;
+`
 
 //importa o hook
 import useRedux from '@/hooks/useRedux'
 
-const StyledToolbar = styled(Toolbar)(({ theme }) => ({
-  alignItems: 'flex-start',
-  paddingTop: theme.spacing(1),
-  paddingBottom: theme.spacing(2),
-  // Override media queries injected by theme.mixins.toolbar
-  '@media all': {
-    minHeight: 128
-  }
-}))
-
 const Chrome = () => {
-  const [hover, setHover] = useState('')
-  const { setState } = useRedux('startbutton', useDispatch())
+  const [url, setURL] = useState('')
+  const { setState } = useRedux(useDispatch())
   const data = useSelector(state => state.data)
 
+  useEffect(() => {
+    setURL('http://www.randon.com.br')
+  }, [])
+
   return (
-    <Grid
-      item
-      direction="column"
-      style={{
-        paddingTop: 10,
-        paddingBottom: 15
-      }}
-    >
-      <AppBar
-        elevation={0}
-        sx={{
-          background: '#E7EAED'
+    <Grid item direction="column">
+      <div
+        style={{
+          backgroundColor: '#E7EAED'
         }}
       >
+        {/* Abas */}
         <div style={{ height: 50 }}>
           <Grid
             container
@@ -72,7 +67,7 @@ const Chrome = () => {
                 marginTop: 10,
                 marginLeft: 10,
                 height: 40,
-                width: '30%',
+                width: '28%',
                 backgroundColor: 'white',
                 borderTopLeftRadius: 10,
                 borderTopRightRadius: 10,
@@ -98,95 +93,18 @@ const Chrome = () => {
                 Nova guia
               </span>
             </Grid>
-            <Grid
-              container
-              display="flex"
-              flexDirection="row"
-              justifyContent="flex-end"
-              alignItems="center"
-              style={{
-                width: '25%',
-                height: 50
-                //backgroundColor: 'red'
-              }}
-            >
-              <VscChevronDown
-                size="1.2em"
-                style={{
-                  color: '#5F6368'
-                }}
-              />
-              <VscChromeMinimize
-                size="1.2em"
-                style={{
-                  color: '#5F6368',
-                  marginLeft: 25
-                }}
-              />
-              <VscChromeMaximize
-                size="1.2em"
-                style={{
-                  color: '#5F6368',
-                  marginLeft: 25
-                }}
-              />
-              <VscChromeClose
-                size="1.2em"
-                style={{
-                  color: '#5F6368',
-                  marginLeft: 25,
-                  marginRight: 25
-                }}
-              />
-            </Grid>
+            <SysButtons />
           </Grid>
         </div>
-      </AppBar>
-      <AppBar
-        position="static"
-        sx={{
-          marginTop: 10
-        }}
-      >
-        <StyledToolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            variant="h5"
-            noWrap
-            component="div"
-            sx={{
-              flexGrow: 1,
-              alignSelf: 'flex-end',
-              backgroundColor: 'red'
-            }}
-          >
-            MUI
-          </Typography>
-          <IconButton
-            size="large"
-            aria-label="search"
-            color="inherit"
-          >
-            <SearchIcon />
-          </IconButton>
-          <IconButton
-            size="large"
-            aria-label="display more actions"
-            edge="end"
-            color="inherit"
-          >
-            <MenuIcon />
-          </IconButton>
-        </StyledToolbar>
-      </AppBar>
+        {/* Navegação */}
+      </div>
+      <Navigation />
+      <BorderLessIframe
+        url={url}
+        width="100%"
+        height="100%"
+        position="absolute"
+      />
     </Grid>
   )
 }

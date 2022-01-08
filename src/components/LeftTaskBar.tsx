@@ -4,10 +4,13 @@ import Image from 'next/image'
 
 import { Grid, Collapse } from '@mui/material'
 
+import { useSelector, useDispatch } from 'react-redux'
+
 // eslint-disable-next-line @emotion/no-vanilla
 import { css, cx } from '@emotion/css'
 
 import StartButton from '@/components/StartButton'
+import useRedux from '@/hooks/useRedux'
 
 const cls1 = css`
   background-color: #394c55;
@@ -15,6 +18,8 @@ const cls1 = css`
 
 const LeftTaskBar = () => {
   const [hover, setHover] = useState('')
+  const { setState } = useRedux(useDispatch())
+  const data = useSelector(state => state.data)
 
   return (
     <Grid item display={'flex'} direction="row">
@@ -32,6 +37,12 @@ const LeftTaskBar = () => {
         onMouseEnter={() => setHover('chrome')}
         onMouseLeave={() => setHover('')}
         className={cx({ [cls1]: hover === 'chrome' })}
+        onClick={() => {
+          //   console.log(data.apps.chrome?.open)
+          setState('apps', {
+            chrome: { open: !data.apps?.chrome?.open }
+          })
+        }}
       >
         <div
           style={{

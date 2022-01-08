@@ -45,7 +45,7 @@ interface AppProps {
 
 const StartButton = () => {
   const [hover, setHover] = useState('')
-  const { setState } = useRedux('startbutton', useDispatch())
+  const { setState } = useRedux(useDispatch())
   const data = useSelector(state => state.data)
 
   function AppComponent({ name, image }: AppProps) {
@@ -111,7 +111,9 @@ const StartButton = () => {
         onMouseEnter={() => setHover('start')}
         onMouseLeave={() => setHover('')}
         className={cx({ [cls1]: hover === 'start' })}
-        onClick={() => setState({ open: !data.startbutton.open })}
+        onClick={() =>
+          setState('startbutton', { open: !data.startbutton.open })
+        }
       >
         <FaWindows
           size="1.5em"

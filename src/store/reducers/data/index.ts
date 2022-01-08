@@ -9,7 +9,8 @@ import {
 
 const initialState = {
   snack: { show: false, text: '' },
-  startbutton: { open: false }
+  startbutton: { open: false },
+  apps: { chrome: { open: false } }
 }
 
 const reducer = (state = initialState, action: any) => {

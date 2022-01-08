@@ -7,7 +7,9 @@ import {
   Grid,
   Drawer,
   AppBar,
-  ClickAwayListener
+  ClickAwayListener,
+  Fade,
+  Grow
 } from '@mui/material'
 import { styled } from '@mui/material/styles'
 
@@ -15,6 +17,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 // eslint-disable-next-line @emotion/no-vanilla
 import { css, cx } from '@emotion/css'
+import { motion } from 'framer-motion'
 import {
   DragDropContext,
   Droppable,
@@ -43,7 +46,7 @@ const finalApps = [
 
 const Desktop = () => {
   const [apps, updateApps] = useState(finalApps)
-  const { setState } = useRedux('startbutton', useDispatch())
+  const { setState } = useRedux(useDispatch())
   const data = useSelector(state => state.data)
 
   function handleOnDragEnd(result) {
@@ -114,19 +117,25 @@ const Desktop = () => {
           </div>
         )}
       </Droppable>
-      <Draggable bounds="body">
-        <div
-          style={{
-            position: 'relative',
-            zIndex: 1,
-            backgroundColor: 'white',
-            width: '80%',
-            height: '60%'
-          }}
-        >
-          <Chrome />
-        </div>
-      </Draggable>
+      {/* {console.log(data.apps?.chrome?.open == null)} */}
+      <motion.div
+        animate={{ opacity: data.apps?.chrome?.open ? 1 : 0 }}
+        style={{ display: 'flex', width: '80%', height: '60%' }}
+      >
+        <Draggable bounds="body">
+          <div
+            style={{
+              position: 'relative',
+              zIndex: 1,
+              backgroundColor: 'white',
+              width: '100%',
+              height: '100%'
+            }}
+          >
+            <Chrome />
+          </div>
+        </Draggable>
+      </motion.div>
     </DragDropContext>
   )
 }

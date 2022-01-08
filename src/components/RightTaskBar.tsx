@@ -37,7 +37,7 @@ const cls1 = css`
 const RightTaskBar = () => {
   const [hover, setHover] = useState('')
   const [dateState, setDateState] = useState(new Date())
-  const { setState } = useRedux('startbutton', useDispatch())
+  const { setState } = useRedux(useDispatch())
   const data = useSelector(state => state.data)
 
   useEffect(() => {
